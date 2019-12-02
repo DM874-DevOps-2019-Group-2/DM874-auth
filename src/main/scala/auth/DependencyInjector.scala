@@ -1,5 +1,9 @@
 package auth
 
-class DependencyInjector {
+import auth.services.JWTService
 
+class DependencyInjector(
+                        config: com.typesafe.config.Config
+                        ) {
+  lazy val jwtService = new JWTService(config)
 }

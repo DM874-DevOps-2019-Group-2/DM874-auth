@@ -13,7 +13,16 @@ lazy val root = (project in file("."))
             circeCore,
             circeParser,
             circeGeneric,
-            typesafeConfig
+            typesafeConfig,
+            akkaHttp,
+            akkaStream,
+            slick,
+            postgresDriver,
+            jwt,
+            scalaBcrypt,
+            scalaLogging,
+            slf4jlog,
+            log4j
       )
 )
 
