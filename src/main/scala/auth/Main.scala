@@ -35,6 +35,7 @@ object Main extends App with auth.helper.ClassLogger {
 
             val users = slick.lifted.TableQuery[Users]
 
+            //Query for username
             val q = users.filter(_.username === unauthedUser.username).map(x => (x.password, x.id)).result.headOption.map{
               case None => {
                 logger.error(s"Failed to find user with username ${unauthedUser.username}")
@@ -57,10 +58,12 @@ object Main extends App with auth.helper.ClassLogger {
           }
           import io.circe.syntax._
 
+          //Convert the user into a jwt token
           val jwt: Future[Option[String]] = checkedLogin.map(_.map{ authedUser =>
             dependencyInjector.jwtService.createToken(authedUser.asJson.noSpaces)
           })
 
+          //Respond to requester
           onComplete(jwt) {
             case Failure(exception) => {
               logger.error(s"Error: Future failed future ${exception}")
@@ -80,6 +83,7 @@ object Main extends App with auth.helper.ClassLogger {
   val bindingFuture = Http().bindAndHandle(route, "localhost", 8080)
 
   //Block
+  
 
   bindingFuture
     .flatMap(_.unbind()) // trigger unbinding from the port
