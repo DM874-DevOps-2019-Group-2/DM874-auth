@@ -15,9 +15,16 @@ spec:
       labels:
         app: auth
     spec:
+      initContainers:
+        - name: migrations-container
+          image: MIGRATIONS_IMAGE
+          imagePullPolicy: Always
+          envFrom:
+            - secretRef:
+                name: db-secrets
       containers:
         - name: auth-container
-          image: IMAGE
+          image: AUTH_IMAGE
           imagePullPolicy: Always
           envFrom:
             - secretRef:
