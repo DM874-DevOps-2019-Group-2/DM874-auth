@@ -14,7 +14,7 @@ object Dependencies {
   lazy val akkaStream = "com.typesafe.akka" %% "akka-stream" % "2.5.26"
 
   lazy val slick = "com.typesafe.slick" %% "slick" % "3.3.2"
-  lazy val postgresDriver = "postgresql" % "postgresql" % "9.1-901-1.jdbc4"
+  lazy val postgresDriver = "org.postgresql" % "postgresql" % "42.2.5"
 
   lazy val jwt = "com.pauldijou" %% "jwt-core" % "3.0.1"
   lazy val scalaBcrypt = "com.github.t3hnar" %% "scala-bcrypt" % "4.1"
@@ -24,4 +24,6 @@ object Dependencies {
   lazy val scalaLogging = "com.typesafe.scala-logging" %% "scala-logging" % "3.9.2"
   lazy val slf4jlog = "org.slf4j" % "slf4j-log4j12" % "1.7.25"
   lazy val log4j = "log4j" % "log4j" % "1.2.17"
+
+  lazy val hikari = "com.typesafe.slick" %% "slick-hikaricp" % "3.3.2"
 }

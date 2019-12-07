@@ -8,8 +8,6 @@ lazy val root = (project in file("."))
       organization := "ch.epfl.scala",
       version := "1.0",
       libraryDependencies ++= Seq(
-            kafkaStreamsJava,
-            kafkaStreamsScala,
             circeCore,
             circeParser,
             circeGeneric,
@@ -22,7 +20,8 @@ lazy val root = (project in file("."))
             scalaBcrypt,
             scalaLogging,
             slf4jlog,
-            log4j
+            log4j,
+            hikari
       )
 )
 
