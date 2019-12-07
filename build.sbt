@@ -4,8 +4,8 @@ import Dependencies._
 
 lazy val root = (project in file("."))
     .settings(
-      name := "hello-world",
-      organization := "ch.epfl.scala",
+      name := "dm874-auth",
+      organization := "dm874",
       version := "1.0",
       libraryDependencies ++= Seq(
             circeCore,

@@ -20,10 +20,8 @@ spec:
           image: IMAGE
           imagePullPolicy: Always
           envFrom:
-            - configMapRef:
-                name: auth-config
             - secretRef:
-                name: auth-secret
+                name: db-secrets
           resources:
             requests:
               memory: "300Mi"
