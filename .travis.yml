@@ -5,19 +5,20 @@ before_install:
 - docker pull dm874/deploy
 stages:
 - build
-- build_migrations
 - publish
 - deploy
 jobs:
   include:
   - stage: build
     script: docker build -t auth .
-  - stage: build_migrations
+  - stage: build
     script: docker build -t migrations migrations/ && sh docker_publish_migrations.sh
   - stage: publish
     script: sh docker_publish.sh
+  - stage: publish
+    script: sh docker_publish_migrations.sh
   - stage: deploy
-    scriot: sh kubectl_set.sh
+    script: sh kubectl_set.sh
 env:
   global:
   - CONTAINER=auth-container
