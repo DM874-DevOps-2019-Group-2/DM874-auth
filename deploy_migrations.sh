@@ -19,4 +19,4 @@ docker run \
 	--env DOCKER_IMAGE_TAG=$TRAVIS_COMMIT \
 	--env SERVICE=auth \
 	--env CONTAINER=migrations-container \
-	-t dm874/deploy \
+	-t dm874/deploy 
