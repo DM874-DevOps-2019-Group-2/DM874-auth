@@ -14,7 +14,7 @@ fi
 
 
 docker run -t dm874/deploy \
-	-e KUBERNETES_TOKEN=$KUBERNETES_TOKEN \
+	-e KUBERNETES_TOKEN \
 	-e DOCKER_IMAGE_SLUG=dm874/auth-migrations \
 	-e DOCKER_IMAGE_TAG=$TRAVIS_COMMIT \
 	-e SERVICE=auth \
