@@ -7,6 +7,7 @@ stages:
 - build
 - build_migrations
 - publish
+- deploy
 jobs:
   include:
   - stage: build
@@ -15,9 +16,8 @@ jobs:
     script: docker build -t migrations migrations/ && sh docker_publish_migrations.sh
   - stage: publish
     script: sh docker_publish.sh
-deploy:
-  provider: script
-  script: sh kubectl_set.sh
+  - stage: deploy
+    scriot: sh kubectl_set.sh
 env:
   global:
   - CONTAINER=auth-container
