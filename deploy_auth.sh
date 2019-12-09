@@ -15,8 +15,8 @@ fi
 
 docker run \
 	--env KUBERNETES_TOKEN \
-	--env DOCKER_IMAGE_SLUG=dm874/auth\
+	--env DOCKER_IMAGE_SLUG=dm874/auth \
 	--env DOCKER_IMAGE_TAG=$TRAVIS_COMMIT \
 	--env SERVICE=auth \
 	--env CONTAINER=auth-container \
-	-t dm874/deploy 
+	dm874/deploy 

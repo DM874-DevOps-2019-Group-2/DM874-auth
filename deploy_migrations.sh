@@ -13,10 +13,10 @@ then
 fi
 
 
-docker run \ 
+docker run \
 	--env KUBERNETES_TOKEN \
 	--env DOCKER_IMAGE_SLUG=dm874/auth-migrations \
 	--env DOCKER_IMAGE_TAG=$TRAVIS_COMMIT \
 	--env SERVICE=auth \
 	--env CONTAINER=migrations-container \
-	-t dm874/deploy 
+	dm874/deploy 
