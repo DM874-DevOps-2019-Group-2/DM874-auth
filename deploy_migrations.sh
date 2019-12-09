@@ -13,9 +13,10 @@ then
 fi
 
 
-docker run -t dm874/deploy \
+docker run \ 
 	-e KUBERNETES_TOKEN \
 	-e DOCKER_IMAGE_SLUG=dm874/auth-migrations \
 	-e DOCKER_IMAGE_TAG=$TRAVIS_COMMIT \
 	-e SERVICE=auth \
-	-e CONTAINER=migrations-container
+	-e CONTAINER=migrations-container \
+	-t dm874/deploy \

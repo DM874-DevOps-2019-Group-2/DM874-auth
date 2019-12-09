@@ -13,10 +13,11 @@ then
 fi
 
 
-docker run -t dm874/deploy \
+docker run \
 	--env TEST_ENV \
 	--env KUBERNETES_TOKEN \
 	--env DOCKER_IMAGE_SLUG=dm874/auth\
 	--env DOCKER_IMAGE_TAG=$TRAVIS_COMMIT \
 	--env SERVICE=auth \
-	--env CONTAINER=auth-container
+	--env CONTAINER=auth-container \
+	-t dm874/deploy 
