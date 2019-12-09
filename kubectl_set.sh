@@ -25,6 +25,7 @@ then
 fi
 
 if [ -z "$CONTAINER" ]
+then
 	>&2 echo "CONTAINER not set"
 	exit 22
 fi

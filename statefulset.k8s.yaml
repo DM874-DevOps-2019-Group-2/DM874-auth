@@ -17,14 +17,14 @@ spec:
     spec:
       initContainers:
         - name: migrations-container
-          image: MIGRATIONS_IMAGE
+          image: dm874/auth-migrations
           imagePullPolicy: Always
           envFrom:
             - secretRef:
                 name: db-secrets
       containers:
         - name: auth-container
-          image: AUTH_IMAGE
+          image: dm874/auth
           imagePullPolicy: Always
           envFrom:
             - secretRef:
