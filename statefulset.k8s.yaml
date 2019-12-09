@@ -29,7 +29,6 @@ spec:
           envFrom:
             - secretRef:
                 name: db-secrets
-          envFrom:
             - secretRef:
                 name: jwt-secret
           resources:
