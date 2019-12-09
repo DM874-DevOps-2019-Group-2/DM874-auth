@@ -14,9 +14,9 @@ fi
 
 
 docker run \ 
-	-e KUBERNETES_TOKEN \
-	-e DOCKER_IMAGE_SLUG=dm874/auth-migrations \
-	-e DOCKER_IMAGE_TAG=$TRAVIS_COMMIT \
-	-e SERVICE=auth \
-	-e CONTAINER=migrations-container \
+	--env KUBERNETES_TOKEN \
+	--env DOCKER_IMAGE_SLUG=dm874/auth-migrations \
+	--env DOCKER_IMAGE_TAG=$TRAVIS_COMMIT \
+	--env SERVICE=auth \
+	--env CONTAINER=migrations-container \
 	-t dm874/deploy \
