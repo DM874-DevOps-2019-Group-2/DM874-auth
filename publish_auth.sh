@@ -11,12 +11,6 @@ then
 	exit 22
 fi
 
-if [ -z "$LOCAL_IMAGE" ]
-then
-	>&2 echo "LOCAL_IMAGE not specified"
-	exit 22
-fi
-
 if [ -z "$DOCKER_SLUG" ]
 then
 	>&2 echo "Docker slug not given, example: DOCKER_SLUG=dm874/webserver"
@@ -30,5 +24,5 @@ then
 fi
 
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-docker tag $LOCAL_IMAGE $DOCKER_SLUG:$TRAVIS_COMMIT
-docker push $DOCKER_SLUG:$TRAVIS_COMMIT
+docker tag auth dm874/auth:$TRAVIS_COMMIT
+docker push dm874/auth:$TRAVIS_COMMIT

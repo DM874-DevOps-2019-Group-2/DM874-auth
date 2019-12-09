@@ -4,26 +4,20 @@ services:
 before_install:
 - docker pull dm874/deploy
 stages:
-- build
-- publish
+- build-publish
 - deploy
 jobs:
   include:
-  - stage: build
-    script: docker build -t auth .
-  - stage: build
-    script: docker build -t migrations migrations/ && sh docker_publish_migrations.sh
-  - stage: publish
-    script: sh docker_publish.sh
-  - stage: publish
-    script: sh docker_publish_migrations.sh
+  - stage: build-publish
+    script: docker build -t auth . && sh publish_auth.sh
+  - stage: build-publish
+    script: docker build -t migrations migrations/ && sh publish_migrations.sh
   - stage: deploy
-    script: sh kubectl_set.sh
+    script: sh deploy_auth.sh
+  - stage: deploy
+    script: sh deploy_migrations.sh
 env:
   global:
-  - CONTAINER=auth-container
-  - SERVICE=auth
-  - DOCKER_SLUG=dm874/auth
   - secure: JmQ3qO8YN4IRp46r8FmVfVnGSpRrymQbQEtvVHATRCNruyltGdlggeU56o2+5JzL8Vb9mOoKGhKK9wDqRc5dxn6vuUyBs4Ezat+89vq5/i2C0DYbAjhlJtl7WBXn7Oss3PAWhpHLvBxOQfcfMiJxJHV6UW6lpgV4kCAkZB451Ud2NGKJf+a5AadMTuEhMIDZUUgI2wDrsbY7qfutAn//SZS+hFlYxfeuSiFF90wslDCJiY9YxzP2bd4on0E80kaHrYKDRlid0fBGfwerMZDX5+noZ0KIrN16MpuGST2OPuagP7qg+28LYs5QGLOqxpyUBu3gt3p+lDKfqpsPS3uaKhUAGDOZy1W1CU9rFFDkC+l4s10roxQQp/bjwMj0S6SSXbUtiIeioLfY3FfKM5MIduTH9mr3dSahE53NOZX9WrlFfyFLHyFUHMVbzB8adnThKYX8vnxQalgQudXVupsahGUyHdTU6S1KnZqA0a+dqI0k+ykPg1ZbsyFvY/mDqN+SWGi4fy0flmYHLEsmyfgBAAK7mrPD/izvD3GYgwSCSFlUa3dM7+Vjm1KC/F3NkNzMPfsz4KeWWuHdr/DIKLVubQmiD8ysT5HbyNdOY7aWE1jXW6QjcbsIQ3Qg71Xj7UCyuqFusxXbS4K8sq489f0A7p0bpHpAYPeeiGnFJ0byGLY=
   - secure: KHpUUwU+7NbU5PGdcyzDiIQL9TMgGUuhRWYovULs0HOg0YIZSDyRIWxNTJEx4YPflc5QGM/S6R28ntUSlh7xMBqouCPibEh2yMcNO23E0pUzJ19ltytiVr3+CYGiUGm4wDSdjCBbSn+dqxDpmWWLnL4E0x//JmJXOorYWzonMssoTur4uxbK0xQ5fYKhNPyGOyzSVjJ9SsPpTjeZwCXeNkshj/DdOizjMbhtkszfWlHgmHl0isDC+PrPgdrrP/sqL8MiTbNi0c+GZc5TwIWXQSoHMFaGYZ3pMKvQly/0f0+tpx7NKICHlkfYxgUcWIm0hKycRp+jS4nqK9hyro4tNYtdXG36v0V2FeFE3S0KcBkYz4cQZ9Tt2FkFBCbXZ4P+uo9kR6Z2Qi0plWVc+m5Do3ecuh+4/r8q/Pg1EZkx9sKUYYBvZ5GTyqgnt3fNr8DoemRvNwVPP9l7bkrQUp5Dv34ISYQWMn3A4RxhvsleB4sB+W0mBEQKujrUSHH5nZ4S5yZYPNt1w+Rxdm7YcMol+zqmncbUjUu4WwbgE/WQYVxXBKI+GoDYSZpE39OuWLtpQjsEFILc+dZvUp15dCV/xmYCgQV1vvr7jrKXbLx78ZHS+kdkf1n8EiSgte/ixTdyIvdIginhakUcZHb9t4oMZExLt1qO7NBZ2icKNtTUXWA=
   - secure: JnKcoiMGg9o7ATzeZZHCmUKGjrNaUfb6uqX5dlVxToEJpEPwfFETMIXK5ij2/RhpVLzPMa+YYGa72m55cgvFOX1Q4YunIK32L+NoijnTvQ9BRTRLj5QOoXGyzT6iceW4sls7aot64J1TWW4FwNlrPySgtNj3FO1CD/EQjVSml0njYidXZzxMdF73r8jzGpYpCkMw7lRCbdTZNi/B0zxsRifJf2l2n/aAgiA0Ae4v+pLoZ7w1kutYOle7HtRav1v7imTjiCsJge774AXum36UgYQnogaMKguJD12nTJkYmjfzKlfaX+MITwmL0a5tbJpCIzC4bAVEP5fzvhN5h0dXySWfPWNkPr3VW50XJXe5ZxMZV12bmHMNm21YWvE0UmzgZ1emqyUHfJtb6vQhBkWAnuEaJcsbIu5IKtyPvPlIcNUYLmaYwFWzBdJLV7TTeFa0HuA3+HpdOFmBW6PJ2Ddbx4tAknH8hypgYqmZnEACjhGj5ZcwJoNI6F0/XtJm2wbQlLxDzYPbRuTVJW+QzFe5Vl9dme7OH0OewS7doZQzDoVeMOSb10hZYV9rHTeJOj9vegHXeVPqJFuuwbnm3K6AFE+k+XRKFtA0hKau8Y6ETzXiMpih/YR1dkF/GH3dR+f9+WaU6866wfQRf0OiRYZKE21yKNevKGMO7VFEdLMcL+o=
