@@ -14,7 +14,6 @@ fi
 
 
 docker run \
-	--env TEST_ENV \
 	--env KUBERNETES_TOKEN \
 	--env DOCKER_IMAGE_SLUG=dm874/auth\
 	--env DOCKER_IMAGE_TAG=$TRAVIS_COMMIT \
