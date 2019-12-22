@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: auth
+  labels:
+    app: auth
 spec:
   replicas: 1
   serviceName: "auth"
@@ -17,14 +19,14 @@ spec:
     spec:
       initContainers:
         - name: migrations-container
-          image: dm874/auth-migrations
+          image: dm874/auth-migrations:5e8b9735bdbc4c13c4337b494bcb7de0f7d5b8b5
           imagePullPolicy: Always
           envFrom:
             - secretRef:
                 name: db-secrets
       containers:
         - name: auth-container
-          image: dm874/auth
+          image: dm874/auth:5e8b9735bdbc4c13c4337b494bcb7de0f7d5b8b5
           imagePullPolicy: Always
           ports:
             - containerPort: 8084

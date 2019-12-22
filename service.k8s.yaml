@@ -1,13 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: auth
+  name: auth-service
   namespace: default
   labels:
-    app: auth
+    app: auth-service
 spec:
   ports:
     - port: 8084
+      targetPort: 8084
       name: auth-port
   selector:
     app: auth
