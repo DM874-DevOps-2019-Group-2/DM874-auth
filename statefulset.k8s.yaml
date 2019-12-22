@@ -26,6 +26,9 @@ spec:
         - name: auth-container
           image: dm874/auth
           imagePullPolicy: Always
+          ports:
+            - containerPort: 8084
+              name: auth-port
           envFrom:
             - secretRef:
                 name: db-secrets
