@@ -16,4 +16,4 @@ COPY --from=build-env /src/main/resources/log4j.properties /log4j.properties
 
 RUN ls -la /
 
-CMD java -jar /run.jar -Dlog4j.configuration=/log4j.properties  -Dconfig.file=/application.conf
+CMD ["java", "-jar", "/run.jar", "-Dlog4j.configuration=/log4j.properties", "-Dconfig.file=/application.conf"]

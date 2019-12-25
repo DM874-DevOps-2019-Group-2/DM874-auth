@@ -132,7 +132,7 @@ object Main extends App with auth.helper.ClassLogger {
       }
     )
 
-  val bindingFuture = Http().bindAndHandle(route, "localhost", 8084)
+  val bindingFuture = Http().bindAndHandle(route, "0.0.0.0", 8084)
 
   //Block
   Thread.sleep(Int.MaxValue)
