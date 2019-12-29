@@ -26,4 +26,6 @@ object Dependencies {
   lazy val log4j = "log4j" % "log4j" % "1.2.17"
 
   lazy val hikari = "com.typesafe.slick" %% "slick-hikaricp" % "3.3.2"
+
+  lazy val cors = "ch.megard" %% "akka-http-cors" % "0.4.2"
 }

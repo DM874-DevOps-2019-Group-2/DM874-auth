@@ -21,7 +21,8 @@ lazy val root = (project in file("."))
             scalaLogging,
             slf4jlog,
             log4j,
-            hikari
+            hikari,
+        cors
       )
 )
 
