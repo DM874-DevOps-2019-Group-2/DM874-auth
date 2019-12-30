@@ -11,3 +11,6 @@ This service has 3 routes:
 * users: -> [[userId: int, username: string]]
 
 These routes can be called at any time and the service is completely stateless as it is basically a proxy for the JWT secret and database.
+
+## Configuration
+The service is configurable though the configmap in kubernetes (also supplied in the repository). The service also more fine-tunely configurable though the `application.conf` file in HOCON format (typesafe config).
